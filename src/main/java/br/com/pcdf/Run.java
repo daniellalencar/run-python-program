@@ -47,7 +47,7 @@ public class Run {
     List commands = new ArrayList();
     for (String key : keys) {
       String command =
-          "sudo python3 .\\_001_face_vector_prod_multi.py " + key + " " + listOfRange.get(key)
+          "sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py " + key + " " + listOfRange.get(key)
               + " civil ";
       commands.add(command);
     }
