@@ -39,6 +39,7 @@ public class Run {
   private void execute() {
     final List commandList = getCommandList();
     for (Object command : commandList) {
+
       try {
         LOGGER.info("-----------------------------------------------------------------");
         LOGGER.info("Executing " + command.toString());
@@ -77,7 +78,8 @@ public class Run {
     Map<String, String> listOfRange = getRangeOfDates(1800, 2022);
     final Set<String> keys = listOfRange.keySet();
     List commands = new ArrayList();
-    boolean isTestTwoDir = isItMinimalOfTrying();
+    //boolean isTestTwoDir = isItMinimalOfTrying();
+    boolean isTestTwoDir = true;
     for (String key : keys) {
       if (!isItMinimalOfTrying()) {
         break;
