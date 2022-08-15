@@ -69,6 +69,7 @@ public class CommandsList {
       LOGGER.info("Executing " + command);
     }*/
 
+
     String s = null;
     System.out.println("Standard error of the command (if any):\n");
     while ((s = stdError.readLine()) != null) {
