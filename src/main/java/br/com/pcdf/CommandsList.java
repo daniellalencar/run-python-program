@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Run {
+public class CommandsList {
 
   private static final String DATE_FORMAT = "yyyyMMdd";
   private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -32,13 +32,13 @@ public class Run {
 
 
   public static void main(String[] args) {
-    Run run = new Run();
+    CommandsList run = new CommandsList();
     run.execute();
   }
 
   private void execute() {
-    final List commandList = getCommandList();
-    for (Object command : commandList) {
+    final List<String> commandList = getCommandList();
+    for (String command : commandList) {
 
       try {
         LOGGER.info("-----------------------------------------------------------------");
@@ -52,8 +52,8 @@ public class Run {
     }
   }
 
-  private void executeShellCommand(Object command) throws IOException {
-    Process process = Runtime.getRuntime().exec(command.toString());
+  public void executeShellCommand(String command) throws IOException {
+    Process process = Runtime.getRuntime().exec(toString());
     BufferedReader stdInput = new BufferedReader(new
         InputStreamReader(process.getInputStream()));
 
@@ -74,10 +74,10 @@ public class Run {
     }
   }
 
-  private List getCommandList() {
+  public List<String> getCommandList() {
     Map<String, String> listOfRange = getRangeOfDates(1800, 2022);
     final Set<String> keys = listOfRange.keySet();
-    List commands = new ArrayList();
+    List<String> commands = new ArrayList();
     //boolean isTestTwoDir = isItMinimalOfTrying();
     boolean isTestTwoDir = true;
     for (String key : keys) {
