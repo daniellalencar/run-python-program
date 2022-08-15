@@ -1,6 +1,8 @@
 package br.com.pcdf;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -38,12 +40,36 @@ public class Run {
     final List commandList = getCommandList();
     for (Object command : commandList) {
       try {
+        LOGGER.info("-----------------------------------------------------------------");
         LOGGER.info("Executing " + command.toString());
-        Process process = Runtime.getRuntime().exec(command.toString());
+        executeShellCommand(command);
+        LOGGER.info("-----------------------------------------------------------------");
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, e.toString(), e);
         e.printStackTrace();
       }
+    }
+  }
+
+  private void executeShellCommand(Object command) throws IOException {
+    Process process = Runtime.getRuntime().exec(command.toString());
+    BufferedReader stdInput = new BufferedReader(new
+        InputStreamReader(process.getInputStream()));
+
+    BufferedReader stdError = new BufferedReader(new
+        InputStreamReader(process.getErrorStream()));
+
+// Read the output from the command
+    System.out.println("Standard output of the command:\n");
+    String s = null;
+    while ((s = stdInput.readLine()) != null) {
+      LOGGER.info("Executing " + command.toString());
+    }
+
+// Read any errors from the attempted command
+    System.out.println("Standard error of the command (if any):\n");
+    while ((s = stdError.readLine()) != null) {
+      LOGGER.log(Level.SEVERE, s);
     }
   }
 
