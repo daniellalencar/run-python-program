@@ -29,7 +29,7 @@ public class CommandsList {
   private static final Logger LOGGER = Logger.getLogger(
       Thread.currentThread().getStackTrace()[0].getClassName());
   private static final int MINIMAL_OF_TRYING = 2;
-  private static final int LAST_DATE = 19011222;
+  private static final int LAST_DATE = 19020106;
 
   private int countTry = 0;
 
@@ -41,8 +41,10 @@ public class CommandsList {
 
   private void execute() {
     final List<String> commandList = getCommandList();
+    int i = 0;
     for (String command : commandList) {
       try {
+        LOGGER.info("comandos executados:" + ++i + " de " + commandList.size());
         executeShellCommand(command);
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, e.toString(), e);
