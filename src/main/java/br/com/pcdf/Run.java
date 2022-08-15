@@ -23,6 +23,10 @@ public class Run {
   private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
   private static final Logger LOGGER = Logger.getLogger(
       Thread.currentThread().getStackTrace()[0].getClassName());
+  private static final int MINIMAL_OF_TRYING = 2;
+
+  private static int countTry = 2;
+
 
   public static void main(String[] args) {
     Run run = new Run();
@@ -45,13 +49,25 @@ public class Run {
     Map<String, String> listOfRange = getRangeOfDates(1800, 2022);
     final Set<String> keys = listOfRange.keySet();
     List commands = new ArrayList();
+    boolean isTestTwoDir = isItMinimalOfTrying();
     for (String key : keys) {
+      if (!isItMinimalOfTrying()) {
+        break;
+      }
       String command =
-          "sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py " + key + " " + listOfRange.get(key)
+          "sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py " + key + " "
+              + listOfRange.get(key)
               + " civil ";
+
+      LOGGER.info("Minimal of Trying:" + countTry);
       commands.add(command);
+      ++countTry;
     }
     return commands;
+  }
+
+  private boolean isItMinimalOfTrying() {
+    return MINIMAL_OF_TRYING >= countTry;
   }
 
   private Map<String, String> getRangeOfDates(int initialYear, int finalYear) {
