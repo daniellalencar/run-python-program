@@ -36,7 +36,7 @@ public class Run {
         LOGGER.info("Executing " + command.toString());
         Process process = Runtime.getRuntime().exec(command.toString());
       } catch (IOException e) {
-        //e.printStackTrace();
+        e.printStackTrace();
       }
     }
   }
