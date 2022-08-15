@@ -1,6 +1,8 @@
 package br.com.pcdf;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -55,10 +57,18 @@ public class CommandsList {
       LOGGER.info("-----------------------------------------------------------------");
       LOGGER.info("Executing " + command.toString());
       Process process = Runtime.getRuntime().exec(command);
+      process.waitFor();
+      BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      String line = "";
+      while ((line = buf.readLine()) != null) {
+        System.out.println(line);
+      }
       LOGGER.info("-----------------------------------------------------------------");
 
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE, e.toString(), e);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
   }
 
