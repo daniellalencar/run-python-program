@@ -56,19 +56,25 @@ public class CommandsList {
   }
 
   public void executeShellCommand(String command) throws IOException {
-    Process process = Runtime.getRuntime().exec(command);
-    //BufferedReader stdInput = new BufferedReader(new
-    //    InputStreamReader(process.getInputStream()));
+    try {
+      LOGGER.info("-----------------------------------------------------------------");
+      LOGGER.info("Executing " + command.toString());
+      Process process = Runtime.getRuntime().exec(command);
+      LOGGER.info("-----------------------------------------------------------------");
 
-    BufferedReader stdError = new BufferedReader(new
-        InputStreamReader(process.getErrorStream()));
+      BufferedReader stdError = new BufferedReader(new
+          InputStreamReader(process.getErrorStream()));
 
-    System.out.println("Standard output of the command:\n");
+      System.out.println("Standard output of the command:\n");
 
-    String s = null;
-    System.out.println("Standard error of the command (if any):\n");
-    while ((s = stdError.readLine()) != null) {
-      LOGGER.log(Level.SEVERE, s);
+      String s = null;
+      System.out.println("Standard error of the command (if any):\n");
+      while ((s = stdError.readLine()) != null) {
+        LOGGER.log(Level.SEVERE, s);
+      }
+    } catch (IOException e) {
+      LOGGER.log(Level.SEVERE, e.toString(), e);
+      //e.printStackTrace();
     }
   }
 
