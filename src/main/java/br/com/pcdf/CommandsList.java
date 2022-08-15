@@ -62,14 +62,12 @@ public class CommandsList {
     BufferedReader stdError = new BufferedReader(new
         InputStreamReader(process.getErrorStream()));
 
-// Read the output from the command
     System.out.println("Standard output of the command:\n");
     String s = null;
     while ((s = stdInput.readLine()) != null) {
-      LOGGER.info("Executing " + command.toString());
+      LOGGER.info("Executing " + command);
     }
 
-// Read any errors from the attempted command
     System.out.println("Standard error of the command (if any):\n");
     while ((s = stdError.readLine()) != null) {
       LOGGER.log(Level.SEVERE, s);
