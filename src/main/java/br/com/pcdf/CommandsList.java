@@ -35,7 +35,11 @@ public class CommandsList {
 
   public static void main(String[] args) {
     CommandsList run = new CommandsList();
-    run.execute();
+    try {
+      run.executeShellCommand("sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py 19010312 19010327 civil");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private void execute() {
@@ -49,7 +53,7 @@ public class CommandsList {
         LOGGER.info("-----------------------------------------------------------------");
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, e.toString(), e);
-        e.printStackTrace();
+        //e.printStackTrace();
       }
     }
   }
@@ -94,7 +98,7 @@ public class CommandsList {
               + listOfRange.get(key)
               + " civil ";
 
-      LOGGER.info("Minimal of Trying:" + countTry);
+//      LOGGER.info("Minimal of Trying:" + countTry);
       commands.add(command);
       ++countTry;
     }
