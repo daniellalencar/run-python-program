@@ -35,13 +35,7 @@ public class CommandsList {
 
   public static void main(String[] args) {
     CommandsList run = new CommandsList();
-    try {
-      System.out.println("-------------------teste----------------");
-      run.executeShellCommand("sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py 19010312 19010327 civil");
-    } catch (IOException e) {
-      System.out.println("-------------------erorororororororo----------------");
-      e.printStackTrace();
-    }
+    run.execute();
   }
 
   private void execute() {
@@ -61,7 +55,7 @@ public class CommandsList {
   }
 
   public void executeShellCommand(String command) throws IOException {
-    Process process = Runtime.getRuntime().exec(toString());
+    Process process = Runtime.getRuntime().exec(command);
     BufferedReader stdInput = new BufferedReader(new
         InputStreamReader(process.getInputStream()));
 
@@ -91,7 +85,7 @@ public class CommandsList {
     for (String key : keys) {
       //if (!isItMinimalOfTrying()) {
       //  break;
-     /// }
+      /// }
       if (!isTestTwoDir) {
         break;
       }
