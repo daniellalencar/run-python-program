@@ -42,15 +42,10 @@ public class CommandsList {
   private void execute() {
     final List<String> commandList = getCommandList();
     for (String command : commandList) {
-
       try {
-        LOGGER.info("-----------------------------------------------------------------");
-        LOGGER.info("Executing " + command.toString());
         executeShellCommand(command);
-        LOGGER.info("-----------------------------------------------------------------");
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, e.toString(), e);
-        //e.printStackTrace();
       }
     }
   }
@@ -74,7 +69,6 @@ public class CommandsList {
       }
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE, e.toString(), e);
-      //e.printStackTrace();
     }
   }
 
