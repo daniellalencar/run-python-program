@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Run {
@@ -25,7 +26,7 @@ public class Run {
       Thread.currentThread().getStackTrace()[0].getClassName());
   private static final int MINIMAL_OF_TRYING = 2;
 
-  private static int countTry = 2;
+  private int countTry = 0;
 
 
   public static void main(String[] args) {
@@ -40,6 +41,7 @@ public class Run {
         LOGGER.info("Executing " + command.toString());
         Process process = Runtime.getRuntime().exec(command.toString());
       } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, e.toString(), e);
         e.printStackTrace();
       }
     }
@@ -67,7 +69,7 @@ public class Run {
   }
 
   private boolean isItMinimalOfTrying() {
-    return MINIMAL_OF_TRYING >= countTry;
+    return MINIMAL_OF_TRYING > countTry;
   }
 
   private Map<String, String> getRangeOfDates(int initialYear, int finalYear) {
