@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 public class CommandsList {
 
   private static final String DATE_FORMAT = "yyyyMMdd";
+  private static final int INITIAL_YEAR = 1900;
+  private static final int FINAL_YEAR = 2022;
   private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
   private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
   private static final Logger LOGGER = Logger.getLogger(
@@ -75,7 +77,7 @@ public class CommandsList {
   }
 
   public List<String> getCommandList() {
-    Map<String, String> listOfRange = getRangeOfDates(1800, 2022);
+    Map<String, String> listOfRange = getRangeOfDates(INITIAL_YEAR, FINAL_YEAR);
     final Set<String> keys = listOfRange.keySet();
     List<String> commands = new ArrayList();
     //boolean isTestTwoDir = isItMinimalOfTrying();
