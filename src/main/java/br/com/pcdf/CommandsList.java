@@ -36,8 +36,10 @@ public class CommandsList {
   public static void main(String[] args) {
     CommandsList run = new CommandsList();
     try {
+      System.out.println("-------------------teste----------------");
       run.executeShellCommand("sudo python3 /home/iiadmin/projetos/persona/_001_face_vector_prod_multi.py 19010312 19010327 civil");
     } catch (IOException e) {
+      System.out.println("-------------------erorororororororo----------------");
       e.printStackTrace();
     }
   }
