@@ -90,7 +90,6 @@ public class CommandsList {
               + listOfRange.get(key)
               + " civil ";
 
-//      LOGGER.info("Minimal of Trying:" + countTry);
       if (Integer.parseInt(key) >= LAST_DATE) {
         commands.add(command);
       }
