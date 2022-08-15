@@ -56,18 +56,20 @@ public class CommandsList {
 
   public void executeShellCommand(String command) throws IOException {
     Process process = Runtime.getRuntime().exec(command);
-    BufferedReader stdInput = new BufferedReader(new
-        InputStreamReader(process.getInputStream()));
+    //BufferedReader stdInput = new BufferedReader(new
+    //    InputStreamReader(process.getInputStream()));
 
     BufferedReader stdError = new BufferedReader(new
         InputStreamReader(process.getErrorStream()));
 
     System.out.println("Standard output of the command:\n");
-    String s = null;
+    /*
+
     while ((s = stdInput.readLine()) != null) {
       LOGGER.info("Executing " + command);
-    }
+    }*/
 
+    String s = null;
     System.out.println("Standard error of the command (if any):\n");
     while ((s = stdError.readLine()) != null) {
       LOGGER.log(Level.SEVERE, s);
