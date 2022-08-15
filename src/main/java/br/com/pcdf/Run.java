@@ -81,7 +81,10 @@ public class Run {
     //boolean isTestTwoDir = isItMinimalOfTrying();
     boolean isTestTwoDir = true;
     for (String key : keys) {
-      if (!isItMinimalOfTrying()) {
+      //if (!isItMinimalOfTrying()) {
+      //  break;
+     /// }
+      if (!isTestTwoDir) {
         break;
       }
       String command =
