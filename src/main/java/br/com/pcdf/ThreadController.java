@@ -11,10 +11,6 @@ public class ThreadController {
   private static int firstValue = 0;
   private static int lastValue = 10;
 
-  public static void main(String[] args) {
-    ThreadController threadController = new ThreadController();
-    threadController.tet();
-  }
 
   private void tet() {
     List testlist = new ArrayList();
