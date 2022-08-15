@@ -29,6 +29,7 @@ public class CommandsList {
   private static final Logger LOGGER = Logger.getLogger(
       Thread.currentThread().getStackTrace()[0].getClassName());
   private static final int MINIMAL_OF_TRYING = 2;
+  private static final int LAST_DATE = 19011222;
 
   private int countTry = 0;
 
@@ -63,12 +64,6 @@ public class CommandsList {
         InputStreamReader(process.getErrorStream()));
 
     System.out.println("Standard output of the command:\n");
-    /*
-
-    while ((s = stdInput.readLine()) != null) {
-      LOGGER.info("Executing " + command);
-    }*/
-
 
     String s = null;
     System.out.println("Standard error of the command (if any):\n");
@@ -96,7 +91,9 @@ public class CommandsList {
               + " civil ";
 
 //      LOGGER.info("Minimal of Trying:" + countTry);
-      commands.add(command);
+      if (Integer.parseInt(key) >= LAST_DATE) {
+        commands.add(command);
+      }
       ++countTry;
     }
     return commands;

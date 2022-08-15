@@ -1,14 +1,14 @@
 package br.com.pcdf;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ThreadController {
 
-  private static int firstValue = 0;
-  private static int lastValue = 10;
+  private int firstValue = 0;
+  private int lastValue = 10;
+  private static final int THREAD_QUANTITY = 10;
 
 
   public static void main(String[] args) {
@@ -30,6 +30,8 @@ public class ThreadController {
         .map(c -> new Thread(c))
         .collect(Collectors.toList());
 
+    threadList.forEach(thread -> thread.start());
+
     boolean isProcessing = false;
     do {
       isProcessing = false;
@@ -41,12 +43,11 @@ public class ThreadController {
       }
     } while (isProcessing);
 
-    int newLastValue = firstValue + lastValue;
-    int newFinal = lastValue + lastValue;
+    firstValue = firstValue + THREAD_QUANTITY;
+    lastValue = lastValue + THREAD_QUANTITY;
 
-    if (newFinal <= commandList.size() && newLastValue < commandList.size()) {
-      final List<String> strings = commandList.subList(newLastValue, newFinal);
-      executeThreads(strings);
+    if (lastValue <= commandList.size() && firstValue < commandList.size()) {
+      executeThreads(commandList);
     }
   }
 
