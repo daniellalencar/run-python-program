@@ -49,7 +49,7 @@ public class CommandsList {
     for (String command : commandList) {
       try {
         LOGGER.info("comandos executados:" + ++i + " de " + commandList.size());
-        executeShellCommand(command);
+        executeShellCommand2(command);
         String subStringNumber = command.substring(command.indexOf("py ") + 3);
         subStringNumber = subStringNumber.replace(" ","#").split("#")[0];
         FileUtil.writeToFile(subStringNumber);
