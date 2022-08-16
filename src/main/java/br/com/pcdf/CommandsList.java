@@ -83,7 +83,7 @@ public class CommandsList {
     try {
       LOGGER.info("-----------------------------------------------------------------");
       LOGGER.info("Executing " + command.toString());
-      Process p = Runtime.getRuntime().exec("ps -ef");
+      Process p = Runtime.getRuntime().exec(command);
 
       BufferedReader stdInput = new BufferedReader(new
           InputStreamReader(p.getInputStream()));
