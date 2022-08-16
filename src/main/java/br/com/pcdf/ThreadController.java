@@ -29,8 +29,7 @@ public class ThreadController {
 
   private void executeThreads(final List<String> commandList) {
 
-    List<String> list = commandList.subList(firstValue, lastValue);
-    final List<Thread> threadList = list.stream()
+    final List<Thread> threadList = commandList.stream()
         .map(c -> new Worker(c))
         .map(c -> new Thread(c))
         .collect(Collectors.toList());
