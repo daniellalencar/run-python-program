@@ -3,6 +3,7 @@ package br.com.pcdf;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.collections4.ListUtils;
 
 public class ThreadController {
 
@@ -19,19 +20,23 @@ public class ThreadController {
   private void execute() {
     CommandsList commandsList = new CommandsList();
     final List<String> commandList = commandsList.getCommandList();
-    executeThreads(commandList);
+
+    List<List<String>> output = ListUtils
+        .partition(commandList, commandList.size() / THREAD_QUANTITY);
+
+    output.forEach(sublist -> executeThreads(sublist));
   }
 
   private void executeThreads(final List<String> commandList) {
 
-    //List<String> list = commandList.subList(firstValue, lastValue);
-    final List<Thread> threadList = commandList.stream()
+    List<String> list = commandList.subList(firstValue, lastValue);
+    final List<Thread> threadList = list.stream()
         .map(c -> new Worker(c))
         .map(c -> new Thread(c))
         .collect(Collectors.toList());
 
     threadList.forEach(thread -> thread.start());
-/*
+
     boolean isProcessing = false;
     do {
       isProcessing = false;
@@ -43,12 +48,6 @@ public class ThreadController {
       }
     } while (isProcessing);
 
-    firstValue = firstValue + THREAD_QUANTITY;
-    lastValue = lastValue + THREAD_QUANTITY;
-
-    if (lastValue <= commandList.size() && firstValue < commandList.size()) {
-      executeThreads(commandList);
-    }*/
   }
 
   public static class Worker implements Runnable {
