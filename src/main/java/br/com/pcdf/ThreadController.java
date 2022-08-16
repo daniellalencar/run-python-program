@@ -18,9 +18,7 @@ public class ThreadController {
 
   private void execute() {
     CommandsList commandsList = new CommandsList();
-    final String contentFile = FileUtil.readFromFile();
-    final Integer fromFile = contentFile == null ? null : Integer.parseInt(contentFile);
-    final List<String> commandList = commandsList.getCommandList(fromFile);
+    final List<String> commandList = commandsList.getCommandList();
     executeThreads(commandList);
   }
 
