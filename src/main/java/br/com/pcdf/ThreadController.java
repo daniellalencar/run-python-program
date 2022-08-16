@@ -24,14 +24,14 @@ public class ThreadController {
 
   private void executeThreads(final List<String> commandList) {
 
-    List<String> list = commandList.subList(firstValue, lastValue);
-    final List<Thread> threadList = list.stream()
+    //List<String> list = commandList.subList(firstValue, lastValue);
+    final List<Thread> threadList = commandList.stream()
         .map(c -> new Worker(c))
         .map(c -> new Thread(c))
         .collect(Collectors.toList());
 
     threadList.forEach(thread -> thread.start());
-
+/*
     boolean isProcessing = false;
     do {
       isProcessing = false;
@@ -48,7 +48,7 @@ public class ThreadController {
 
     if (lastValue <= commandList.size() && firstValue < commandList.size()) {
       executeThreads(commandList);
-    }
+    }*/
   }
 
   public static class Worker implements Runnable {
