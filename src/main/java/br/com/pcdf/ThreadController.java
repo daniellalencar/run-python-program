@@ -9,7 +9,7 @@ public class ThreadController {
 
   private int firstValue = 0;
   private int lastValue = 10;
-  private static final int THREAD_QUANTITY = 500;
+  private static final int THREAD_QUANTITY = 1200;
 
 
   public static void main(String[] args) {
