@@ -22,7 +22,7 @@ public class ThreadController {
     final List<String> commandList = commandsList.getCommandList();
 
     List<List<String>> output = ListUtils
-        .partition(commandList, 500);
+        .partition(commandList, 100);
 
     output.forEach(sublist -> executeThreads(sublist));
   }
