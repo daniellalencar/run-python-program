@@ -42,12 +42,17 @@ public class CommandsList {
   }
 
   private void execute() {
-    final List<String> commandList = getCommandList();
+    final String contentFile = FileUtil.readFromFile();
+    final Integer fromFile = contentFile == null ? null : Integer.parseInt(contentFile);
+    final List<String> commandList = getCommandList(fromFile);
     int i = 0;
     for (String command : commandList) {
       try {
         LOGGER.info("comandos executados:" + ++i + " de " + commandList.size());
         executeShellCommand(command);
+        String subStringNumber = command.substring(command.indexOf("py ") + 3);
+        subStringNumber = subStringNumber.replace(" ","#").split("#")[0];
+        FileUtil.writeToFile(subStringNumber);
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, e.toString(), e);
       }
@@ -74,16 +79,43 @@ public class CommandsList {
     }
   }
 
-  public List<String> getCommandList() {
+  public void executeShellCommand2(String command) throws IOException {
+    try {
+      LOGGER.info("-----------------------------------------------------------------");
+      LOGGER.info("Executing " + command.toString());
+      Process p = Runtime.getRuntime().exec("ps -ef");
+
+      BufferedReader stdInput = new BufferedReader(new
+          InputStreamReader(p.getInputStream()));
+
+      BufferedReader stdError = new BufferedReader(new
+          InputStreamReader(p.getErrorStream()));
+
+      // read the output from the command
+      String s = null;
+      System.out.println("Standard output of the command:\n");
+      while ((s = stdInput.readLine()) != null) {
+        System.out.println(s);
+      }
+
+      // read any errors from the attempted command
+      System.out.println("Standard error of the command (if any):\n");
+      while ((s = stdError.readLine()) != null) {
+        System.out.println(s);
+      }
+      LOGGER.info("-----------------------------------------------------------------");
+
+    } catch (IOException e) {
+      LOGGER.log(Level.SEVERE, e.toString(), e);
+    }
+  }
+
+  public List<String> getCommandList(Integer lastDate) {
     Map<String, String> listOfRange = getRangeOfDates(INITIAL_YEAR, FINAL_YEAR);
     final Set<String> keys = listOfRange.keySet();
     List<String> commands = new ArrayList();
-    //boolean isTestTwoDir = isItMinimalOfTrying();
     boolean isTestTwoDir = true;
     for (String key : keys) {
-      //if (!isItMinimalOfTrying()) {
-      //  break;
-      /// }
       if (!isTestTwoDir) {
         break;
       }
@@ -92,12 +124,17 @@ public class CommandsList {
               + listOfRange.get(key)
               + " civil ";
 
-      if (Integer.parseInt(key) >= LAST_DATE) {
+      lastDate = lastDate != null ? lastDate : LAST_DATE;
+      if (Integer.parseInt(key) >= lastDate) {
         commands.add(command);
       }
       ++countTry;
     }
     return commands;
+  }
+
+  public List<String> getCommandList() {
+    return getCommandList(LAST_DATE);
   }
 
   private boolean isItMinimalOfTrying() {

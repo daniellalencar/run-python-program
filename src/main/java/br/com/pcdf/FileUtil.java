@@ -1,37 +1,35 @@
 package br.com.pcdf;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class FileUtil {
 
   private static final String FILE_NAME = "cache";
 
   public static void writeToFile(String value) {
-    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))) {
-      bufferedWriter.write(value);
-    } catch (IOException e) {
+    Path path = Paths.get(FILE_NAME);
 
+    try {
+      Files.write(path, value.getBytes(), StandardOpenOption.CREATE);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
-  public static String readFromFile(String value) {
-    String line = "";
-    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
-      line = bufferedReader.readLine();
-      while (line != null) {
-        System.out.println(line);
-        line = bufferedReader.readLine();
-      }
-    } catch (FileNotFoundException e) {
-      // Exception handling
+  public static String readFromFile() {
+    String retorno = null;
+    try {
+      Path path = Paths.get(FILE_NAME);
+      byte[] data = Files.readAllBytes(path);
+      retorno = new String(data);
+      retorno = retorno != null && retorno.equals("") ? null : retorno;
     } catch (IOException e) {
-      // Exception handling
+      // exception handling
     }
-    return line;
+    return retorno;
   }
 }
