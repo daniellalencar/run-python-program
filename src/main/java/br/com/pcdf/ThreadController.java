@@ -63,7 +63,7 @@ public class ThreadController {
     public void run() {
       CommandsList commandsList = new CommandsList();
       try {
-        commandsList.executeShellCommand(command);
+        commandsList.executeShellCommand2(command);
       } catch (IOException e) {
         e.printStackTrace();
       }
