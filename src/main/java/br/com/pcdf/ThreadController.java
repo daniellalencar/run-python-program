@@ -8,7 +8,7 @@ import org.apache.commons.collections4.ListUtils;
 public class ThreadController {
 
 
-  private static final int THREAD_QUANTITY = 250;
+  private static final int THREAD_QUANTITY = 100;
 
 
   public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class ThreadController {
     final List<String> commandList = commandsList.getCommandList();
 
     List<List<String>> output = ListUtils
-        .partition(commandList, 250);
+        .partition(commandList, THREAD_QUANTITY);
 
     output.forEach(sublist -> executeThreads(sublist));
   }
