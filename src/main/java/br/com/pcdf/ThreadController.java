@@ -7,9 +7,8 @@ import org.apache.commons.collections4.ListUtils;
 
 public class ThreadController {
 
-  private int firstValue = 0;
-  private int lastValue = 10;
-  private static final int THREAD_QUANTITY = 1200;
+
+  private static final int THREAD_QUANTITY = 250;
 
 
   public static void main(String[] args) {

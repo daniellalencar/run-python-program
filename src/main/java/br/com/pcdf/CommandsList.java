@@ -31,7 +31,7 @@ public class CommandsList {
   private static final Logger LOGGER = Logger.getLogger(
       Thread.currentThread().getStackTrace()[0].getClassName());
   private static final int MINIMAL_OF_TRYING = 2;
-  private static final int LAST_DATE = 19010111;
+  private static final int LAST_DATE = 19800101;
 
   private int countTry = 0;
 
