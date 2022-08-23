@@ -1,7 +1,9 @@
 package br.com.pcdf;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.ListUtils;
 
@@ -9,6 +11,9 @@ public class ThreadController {
 
 
   private static final int THREAD_QUANTITY = 25;
+
+  private static final Logger LOGGER = Logger.getLogger(
+      Thread.currentThread().getStackTrace()[0].getClassName());
 
 
   public static void main(String[] args) {
@@ -18,15 +23,23 @@ public class ThreadController {
 
   private void execute() {
     CommandsList commandsList = new CommandsList();
-    final List<String> commandList = commandsList.getCommandList();
+    List<String> commandList = commandsList.getCommandList();
+    Collections.sort(commandList, Collections.reverseOrder());
 
-    List<List<String>> output = ListUtils
+    List<List<String>> listOfThreads = ListUtils
         .partition(commandList, THREAD_QUANTITY);
 
-    output.forEach(sublist -> executeThreads(sublist));
+    listOfThreads.forEach(thread -> {
+      int i = 0;
+      executeThread(thread, i, listOfThreads.size());
+    });
   }
 
-  private void executeThreads(final List<String> commandList) {
+  private void executeThread(final List<String> commandList, int threadNumber,
+      int quantityOfThreads) {
+
+    LOGGER.info("-------------------------------------------------------------------------");
+    LOGGER.info("Thread:" + threadNumber++ + " de " + quantityOfThreads);
 
     final List<Thread> threadList = commandList.stream()
         .map(c -> new Worker(c))
