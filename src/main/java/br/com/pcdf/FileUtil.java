@@ -10,12 +10,14 @@ public class FileUtil {
 
   private static final String FILE_NAME = "cache";
 
-  public static void writeToFile(String value) {
+  public static void writeToFile(String value)
+  {
     Path path = Paths.get(FILE_NAME);
-
-    try {
+    try
+    {
       Files.write(path, value.getBytes(), StandardOpenOption.CREATE);
-    } catch (IOException e) {
+    } catch (IOException e)
+    {
       e.printStackTrace();
     }
   }
