@@ -14,7 +14,7 @@ public class ThreadController {
 
     private static final int START_DATE = 19000103;
 
-    private static final int END_DATE = 20140101;
+    private static final int END_DATE = 20220101;
     private static final int THREAD_QUANTITY = 25;
 
     private static final Logger LOGGER = Logger.getLogger(
