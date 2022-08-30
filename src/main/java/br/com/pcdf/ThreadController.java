@@ -12,9 +12,9 @@ public class ThreadController {
 
 
 
-    private static final int START_DATE = 19000103;
+    private static final int START_DATE = 1900;
 
-    private static final int END_DATE = 20000101;
+    private static final int END_DATE = 2022;
     private static final int THREAD_QUANTITY = 25;
 
     private static final Logger LOGGER = Logger.getLogger(
@@ -33,18 +33,14 @@ public class ThreadController {
 
         List<List<String>> listOfThreads = ListUtils
                 .partition(commandList, THREAD_QUANTITY);
-
+        int i = 0;
         listOfThreads.forEach(thread -> {
-            int i = 0;
             executeThread(thread, i, listOfThreads.size());
         });
     }
 
     private void executeThread(final List<String> commandList, int threadNumber,
                                int quantityOfThreads) {
-
-        LOGGER.info("-------------------------------------------------------------------------");
-        LOGGER.info("Thread:" + threadNumber++ + " de " + quantityOfThreads);
 
         final List<Thread> threadList = commandList.stream()
                 .map(c -> new Worker(c))
