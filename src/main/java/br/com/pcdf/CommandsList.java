@@ -31,7 +31,7 @@ public class CommandsList {
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
     private static final int MINIMAL_OF_TRYING = 2;
-    private static final int LAST_DATE = 20130101;
+    private static final int LAST_DATE = 20091101;
 
 
     private int countTry = 0;
@@ -149,8 +149,13 @@ public class CommandsList {
             Date currentDatePlusOneDay = Date
                     .from(localDateTime.plusDays(15).atZone(ZoneId.systemDefault()).toInstant());
 
-            stringStringMap
-                    .put(dateFormat.format(currentDate), dateFormat.format(currentDatePlusOneDay));
+
+            int currentDateCompare = Integer.parseInt(dateFormat.format(currentDatePlusOneDay));
+
+            if (currentDateCompare <= LAST_DATE) {
+                stringStringMap
+                        .put(dateFormat.format(currentDate), dateFormat.format(currentDatePlusOneDay));
+            }
             currentDate = currentDatePlusOneDay;
 
             initialYearTemp = Integer.parseInt(dateFormat.format(currentDate).substring(0, 4));
