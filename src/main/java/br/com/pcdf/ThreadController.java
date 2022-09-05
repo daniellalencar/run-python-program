@@ -15,7 +15,7 @@ public class ThreadController {
     private static final int START_DATE = 1900;
 
     private static final int END_DATE = 2009;
-    private static final int THREAD_QUANTITY = 5;
+    private static final int THREAD_QUANTITY = 3;
 
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
