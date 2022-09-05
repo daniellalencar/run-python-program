@@ -12,13 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 public class ThreadController {
 
 
-
     private static final int START_DATE = 1900;
 
     private static final int END_DATE = 2009;
 
     @Value("${run-python.qtde-threads}")
-    private int threadQuantity = 300;
+    private int threadQuantity;
 
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
@@ -38,7 +37,9 @@ public class ThreadController {
                 .partition(commandList, threadQuantity);
         int i = 0;
         listOfThreads.forEach(thread -> {
-            executeThread(thread, i, listOfThreads.size());
+            new Thread(() -> {
+                executeThread(thread, i, listOfThreads.size());
+            }).start();
         });
     }
 
