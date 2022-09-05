@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 public class ThreadController {
 
@@ -15,7 +16,9 @@ public class ThreadController {
     private static final int START_DATE = 1900;
 
     private static final int END_DATE = 2009;
-    private static final int THREAD_QUANTITY = 300;
+
+    @Value("${run-python.qtde-threads}")
+    private int threadQuantity = 300;
 
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
@@ -32,7 +35,7 @@ public class ThreadController {
         commandList.sort(Collections.reverseOrder());
 
         List<List<String>> listOfThreads = ListUtils
-                .partition(commandList, THREAD_QUANTITY);
+                .partition(commandList, threadQuantity);
         int i = 0;
         listOfThreads.forEach(thread -> {
             executeThread(thread, i, listOfThreads.size());
