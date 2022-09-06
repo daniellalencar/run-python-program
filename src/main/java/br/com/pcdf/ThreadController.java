@@ -36,11 +36,9 @@ public class ThreadController {
         List<List<String>> listOfThreads = ListUtils
                 .partition(commandList, threadQuantity);
         int i = 0;
-        listOfThreads.forEach(thread -> {
-            new Thread(() -> {
-                executeThread(thread, i, listOfThreads.size());
-            }).start();
-        });
+        listOfThreads.forEach(thread ->
+                executeThread(thread, i, listOfThreads.size())
+        );
     }
 
     private void executeThread(final List<String> commandList, int threadNumber,
