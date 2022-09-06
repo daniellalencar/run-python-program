@@ -58,7 +58,7 @@ public class ThreadController {
             isProcessing = false;
             count = 0;
             for (Thread t : threadList) {
-                if (t.isAlive()) {
+                if (!t.isAlive()) {
                     half++;
                 }
             }
