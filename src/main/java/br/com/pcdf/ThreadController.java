@@ -17,7 +17,7 @@ public class ThreadController {
     private static final int END_DATE = 2009;
 
     @Value("${run-python.qtde-threads}")
-    private int threadQuantity = 500;
+    private int threadQuantity = 100;
 
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
