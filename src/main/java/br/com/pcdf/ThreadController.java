@@ -14,7 +14,7 @@ public class ThreadController {
 
     private static final int START_DATE = 1900;
 
-    private static final int END_DATE = 2009;
+    private static final int END_DATE = 2022;
 
     @Value("${run-python.qtde-threads}")
     private int threadQuantity = 100;
