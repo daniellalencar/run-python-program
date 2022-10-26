@@ -150,12 +150,16 @@ public class CommandsList {
                     .from(localDateTime.plusDays(15).atZone(ZoneId.systemDefault()).toInstant());
 
 
+            String year = dateFormat.format(currentDate).substring(0, 4);
+            if(year.equals("2023")){
+                continue;
+            }
             int currentDateCompare = Integer.parseInt(dateFormat.format(currentDatePlusOneDay));
 
-            if (currentDateCompare <= LAST_DATE) {
-                stringStringMap
+            //if (currentDateCompare <= LAST_DATE) {
+            stringStringMap
                         .put(dateFormat.format(currentDate), dateFormat.format(currentDatePlusOneDay));
-            }
+            //}
             currentDate = currentDatePlusOneDay;
 
             initialYearTemp = Integer.parseInt(dateFormat.format(currentDate).substring(0, 4));
