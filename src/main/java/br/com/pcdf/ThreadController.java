@@ -17,7 +17,7 @@ public class ThreadController {
     private static final int END_DATE = 2022;
 
     @Value("${run-python.qtde-threads}")
-    private int threadQuantity = 500;
+    private int threadQuantity = 250;
 
     private static final Logger LOGGER = Logger.getLogger(
             Thread.currentThread().getStackTrace()[0].getClassName());
@@ -51,7 +51,7 @@ public class ThreadController {
 
         threadList.forEach(thread -> thread.start());
 
-        boolean isProcessing;
+        boolean isProcessing = false;
         do {
             isProcessing = false;
             for (Thread t : threadList) {
